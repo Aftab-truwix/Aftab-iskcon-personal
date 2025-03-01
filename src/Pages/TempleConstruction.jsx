@@ -94,7 +94,10 @@ const TempleConstruction = () => {
   return (
     <>
       <div className="w-full h-full bg-[#fde3b6] pt-4 px-4 md:px-20">
+        <div className="relative z-50">
         <Navbar />
+
+        </div>
         <div className="w-full h-full flex flex-col mt-10 px-4 md:px-10">
           {csrDonation.slice(2, 3).map((donation, index) => {
             // Calculate the percentage of amount raised
@@ -118,7 +121,7 @@ const TempleConstruction = () => {
             };
 
             return (
-              <div key={index} className="w-full h-full flex flex-col relative z-20">
+              <div key={index} className="w-full h-full flex flex-col">
                 {/* Image */}
                 <LazyLoadImage
                   src={donation.image}

@@ -58,7 +58,7 @@ const EventPage = () => {
     >
       <div className="mt-10">
         <div className="w-full h-[300px] rounded-3xl relative -z-1 overflow-hidden px-4 md:px-20 ">
-          <LazyLoadImage
+          <img
             src={blogbg}
             alt="blog background"
             effect="blur"

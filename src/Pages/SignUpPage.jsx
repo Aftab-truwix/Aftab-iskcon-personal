@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 const backend = import.meta.env.VITE_BACKEND_URL;
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -315,32 +315,29 @@ function SignUpPage() {
     setCurrentIndex(index);
   };
 
-  
-   
-    const handleLoginSuccess = async (response) => {
-        const idToken = response.credential;
-        console.log("ID token:", idToken);
-        try {
-            const res = await axios.post(`${backend}/secure/google-auth`, {
-                idToken,
-            });
+  const handleLoginSuccess = async (response) => {
+    const idToken = response.credential;
+    console.log("ID token:", idToken);
+    try {
+      const res = await axios.post(`${backend}/secure/google-auth`, {
+        idToken,
+      });
 
-            console.log(res.data);
-            console.log(res.data.data.token);
-            if (res.data.statusCode === 200) {
+      console.log(res.data);
+      console.log(res.data.data.token);
+      if (res.data.statusCode === 200) {
+        localStorage.setItem("token", JSON.stringify(res.data.data.token));
 
-                localStorage.setItem("token", JSON.stringify(res.data.data.token));
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error sending ID token to backend:", error);
+    }
+  };
 
-                navigate("/");
-            }
-        } catch (error) {
-            console.error("Error sending ID token to backend:", error);
-        }
-    };
-
-    const handleLoginFailure = (error) => {
-        console.error("Login failed:", error);
-    };
+  const handleLoginFailure = (error) => {
+    console.error("Login failed:", error);
+  };
 
   return (
     <div className="w-full h-auto flex flex-col mt-10 gap-8 md:flex-row-reverse md:mt-0">
@@ -498,17 +495,15 @@ function SignUpPage() {
             <span className="text-[#999A9C]">Or</span>
             <span className="w-[30%] h-[1px] bg-gray-400"></span>
           </div>
-          <div className="w-full flex justify-center rounded-full">
-            <GoogleOAuthProvider clientId={googleClientId} className="rounded-full">
-            <div className="w-1/2 h-10 bg-gray-300 rounded-full">
-                <GoogleLogin
-                    onSuccess={handleLoginSuccess}
-                    onError={handleLoginFailure}
-                    text="Sign Up"
-                />
-            </div>
-        </GoogleOAuthProvider>
-        </div>
+          <div className="w-full flex justify-center ">
+            <GoogleOAuthProvider clientId={googleClientId}>
+              <GoogleLogin
+                onSuccess={handleLoginSuccess}
+                onError={handleLoginFailure}
+                text="Sign Up"
+              />
+            </GoogleOAuthProvider>
+          </div>
         </div>
       </div>
       <div

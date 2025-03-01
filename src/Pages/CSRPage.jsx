@@ -127,7 +127,7 @@ const CSRPage = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full opacity-15">
           <img src={circlebg} alt="" className="w-full" />
         </div>
-        <div className="absolute top-16 left-1/2 -translate-x-1/2 w-full sm:w-auto lg:h-[70%] ">
+        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-full sm:w-auto lg:h-[70%] ">
           <LazyLoadImage src={csr} alt="csr" effect="blur" className="" />
         </div>
         <div className="absolute bottom-0 right-20 md:flex gap-10 hidden">

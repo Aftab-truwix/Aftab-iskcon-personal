@@ -9,7 +9,7 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 const backend = import.meta.env.VITE_BACKEND_URL;
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -268,18 +268,13 @@ function SignInPage() {
             <span className="text-[#999A9C]">Or</span>
             <span className="w-[30%] h-[1px] bg-gray-400"></span>
           </div>
-          <div className="w-full flex justify-center rounded-full">
-            <GoogleOAuthProvider
-              clientId={googleClientId}
-              className="rounded-full"
-            >
-              <div className="w-1/2 h-10 bg-gray-300 rounded-full">
-                <GoogleLogin
-                  onSuccess={handleLoginSuccess}
-                  onError={handleLoginFailure}
-                  text="Sign In"
-                />
-              </div>
+          <div className="w-full flex justify-center ">
+            <GoogleOAuthProvider clientId={googleClientId}>
+              <GoogleLogin
+                onSuccess={handleLoginSuccess}
+                onError={handleLoginFailure}
+                text="Sign Up"
+              />
             </GoogleOAuthProvider>
           </div>
         </div>

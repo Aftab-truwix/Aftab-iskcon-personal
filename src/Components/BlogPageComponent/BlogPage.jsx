@@ -166,7 +166,7 @@ const BlogPage = () => {
                               className=" overflow-hidden cursor-pointer transform transition duration-500 ease-out hover:scale-105 font-prata"
                             >
                               <div className="rounded-lg ">
-                                <LazyLoadImage
+                                <img
                                   src={blog.image[0]}
                                   alt={blog.title}
                                   effect="blur"

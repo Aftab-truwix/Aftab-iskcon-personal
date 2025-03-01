@@ -178,10 +178,18 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  useEffect(() => {
+    if (donationCartItems.length > 0) {
+      setDonationSidebar(true);
+    } else {
+      setDonationSidebar(false);
+    }
+  }, [donationCartItems]);
+
   return (
     <>
       {/* Upper Navbar */}
-      <div className="w-full flex justify-end z-[100] ">
+      <div className="w-full flex justify-end z-[100]">
         <div className="flex items-center gap-3">
           <div className="bg-[#ffffff] hidden  rounded-3xl py-3 px-4 lg:flex items-center gap-2 shadow-[0_1px_5px_rgba(0,0,0,0.5)]">
             <span>
@@ -411,7 +419,7 @@ const Navbar = () => {
           )}
           {!hasAccessToken ? (
             <>
-              <div> 
+              <div>
                 <Link
                   to={"/signup"}
                   className="bg-[#eb852c] text-white md:hover:bg-white md:hover:text-[#eb852c] duration-500 ease-in-out text-[10px] lg:text-sm font-semibold rounded-full py-2 md:py-3 px-8 cursor-pointer flex justify-center items-center shadow-[0_1px_5px_rgba(0,0,0,0.5)]"
@@ -479,9 +487,7 @@ const Navbar = () => {
                       {label}
                       <IoIosArrowDown />
                       {dropdownOpen && (
-                        <div
-                          className="absolute top-6 left-0 w-60 z-50 bg-white shadow-md rounded-xl"
-                        >
+                        <div className="absolute top-6 left-0 w-60 z-50 bg-white shadow-md rounded-xl">
                           <ul className="flex flex-col p-2">
                             <li>
                               <NavLink
@@ -882,8 +888,9 @@ const Navbar = () => {
       </div>
 
       {/* Donation Sidebar with Smooth Animation */}
+     
       <div
-        className={`fixed inset-x-0 font-poppins z-[100] h-[35%] flex flex-col overflow-y-scroll bottom-0 w-full bg-white shadow-lg px-6 py-3 transform transition-transform duration-300 ease-in-out  
+        className={`fixed font-poppins z-[100] h-[250px] flex flex-col overflow-y-scroll scrollbar-hide left-0 bottom-0 w-full bg-white shadow-lg px-6 py-3 transform transition-transform duration-300 ease-in-out  
         ${donationSidebar ? "translate-y-0" : "translate-y-full"}`}
         style={{
           scrollbarWidth: "none",
@@ -998,6 +1005,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+     
 
       {/* Backdrop for Cart Sidebar */}
       {cartSidebar && (
@@ -1008,12 +1016,12 @@ const Navbar = () => {
       )}
 
       {/*Backdrop for Donation Sidebar Prevents clicking on the main content while the sidebar is open */}
-      {donationSidebar && (
+      {/* {donationSidebar && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-50"
           onClick={() => setDonationSidebar(false)}
         ></div>
-      )}
+      )} */}
     </>
   );
 };
