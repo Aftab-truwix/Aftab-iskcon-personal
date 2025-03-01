@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 const backend = import.meta.env.VITE_BACKEND_URL;
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -69,7 +70,7 @@ function SignUpPage() {
           otp: simpleOtp,
         });
         if (response.status === 200 || response.status === 201) {
-          alert("Email Verified successfully");
+          toast.success("Email Verified successfully");
           setUserDetails({
             name: "",
             email: "",
@@ -93,7 +94,7 @@ function SignUpPage() {
           }
         );
         if (response.status === 200 || response.status === 201) {
-          alert("Mobile Verified successfully");
+          toast.success("Mobile Verified successfully");
           setUserDetails({
             name: "",
             email: "",
@@ -144,7 +145,7 @@ function SignUpPage() {
 
       if (response.status === 200 || response.status === 201) {
         toast.dismiss();
-        alert("OTP sent successfully");
+        toast.success("OTP sent successfully");
       }
     } catch (error) {
       console.log("Error while verifying otp", error);
@@ -161,7 +162,7 @@ function SignUpPage() {
 
     if (!/^[A-Za-z\s]+$/.test(userDetails.name.trim())) {
       toast.dismiss();
-      alert("Name should contain only alphabets and spaces.");
+      toast.error("Name should contain only alphabets and spaces.");
       return;
     }
 
@@ -169,33 +170,33 @@ function SignUpPage() {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!userDetails.email || !emailRegex.test(userDetails.email)) {
         toast.dismiss();
-        alert("Please enter a valid email address");
+        toast.error("Please enter a valid email address");
         return;
       }
     } else if (signUpWay === "phone") {
       // If using phone, check if the phone number is not empty and properly formatted
       if (!userDetails.phone_no || userDetails.phone_no.length < 10) {
         toast.dismiss();
-        alert("Please enter a valid phone number");
+        toast.error("Please enter a valid phone number");
         return;
       }
     }
 
     if (!userDetails.password) {
       toast.dismiss();
-      alert("Password is required");
+      toast.error("Password is required");
       return;
     }
 
     if (userDetails.password.length < 6) {
       toast.dismiss();
-      alert("Password must be at least 6 characters long");
+      toast.error("Password must be at least 6 characters long");
       return;
     }
 
     if (userDetails.password !== userDetails.confirmPassword) {
       toast.dismiss();
-      alert("Password and Confirm Password do not match");
+      toast.error("Password and Confirm Password do not match");
       return;
     }
 
@@ -213,7 +214,7 @@ function SignUpPage() {
           setIsResendDisabled(true); // Disable resend initially
         } else {
           toast.dismiss();
-          alert("Account created successfully");
+          toast.success("Account created successfully");
           setUserDetails({
             name: "",
             email: "",
@@ -234,7 +235,7 @@ function SignUpPage() {
       // You can redirect the user or show a success message here
     } catch (error) {
       console.log("Error while registering user", error);
-      alert(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   }
 
@@ -340,6 +341,9 @@ function SignUpPage() {
   };
 
   return (
+    <>
+    <ToastContainer />
+
     <div className="w-full h-auto flex flex-col mt-10 gap-8 md:flex-row-reverse md:mt-0">
       <div
         className={`${
@@ -617,6 +621,7 @@ function SignUpPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

@@ -8,6 +8,8 @@ import { IoMdEyeOff } from "react-icons/io";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 const backend = import.meta.env.VITE_BACKEND_URL;
@@ -90,19 +92,19 @@ function SignInPage() {
     if (signInWay === "email") {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!userDetails.email || !emailRegex.test(userDetails.email)) {
-        alert("Please enter a valid email address");
+        toast.error("Please enter a valid email address");
         return;
       }
     } else if (signInWay === "phone") {
       // If using phone, check if the phone number is not empty and properly formatted
       if (!userDetails.phone_no || userDetails.phone_no.length < 10) {
-        alert("Please enter a valid phone number");
+        toast.error("Please enter a valid phone number");
         return;
       }
     }
 
     if (!userDetails.password) {
-      alert("Password is required");
+      toast.error("Password is required");
       return;
     }
 
@@ -114,7 +116,7 @@ function SignInPage() {
       );
       // console.log("response",response.data)
       if (response.status === 200 || response.status === 201) {
-        alert("User successfully logged in");
+        toast.success("User successfully logged in");
         setUserDetails({
           // name: '',
           email: "",
@@ -126,7 +128,7 @@ function SignInPage() {
       }
     } catch (error) {
       console.log("Error while Login user", error);
-      alert(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   }
 
@@ -158,6 +160,9 @@ function SignInPage() {
     console.error("Login failed:", error);
   };
   return (
+    <>
+    <ToastContainer />
+
     <div className="w-full h-auto flex flex-col mt-10 gap-8 md:flex-row-reverse md:mt-0">
       <div className="w-full h-auto flex flex-col gap-14 px-5 lg:px-10 xl:px-20 sm:w-[70%] sm:mx-auto md:mx-0 md:w-[50%] lg:my-10">
         <Link to="/" className="w-full h-auto flex justify-center items-center">
@@ -197,7 +202,7 @@ function SignInPage() {
               Sign In via Mobile Number
             </button>
           </div>
-          <div className="w-full h-auto flex flex-col my-5 gap-4 lg:my-7 lg:gap-6">
+          <div className="w-full h-auto flex flex-col mt-5 gap-4 lg:my-7 lg:gap-6">
             {/* <input type="text" placeholder='Name' onChange={(e) => setUserDetails({ ...userDetails, name: e.target.value })} value={userDetails.name} className='w-full h-auto px-3 border border-black rounded-3xl py-2' /> */}
             {signInWay === "email" ? (
               <input
@@ -263,7 +268,7 @@ function SignInPage() {
               </Link>
             </div>
           </div>
-          <div className="w-full h-auto flex items-center justify-center gap-2">
+          <div className="w-full h-auto flex items-center justify-center gap-2 mb-6">
             <span className="w-[30%] h-[1px] bg-gray-400"></span>
             <span className="text-[#999A9C]">Or</span>
             <span className="w-[30%] h-[1px] bg-gray-400"></span>
@@ -318,6 +323,7 @@ function SignInPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const backend = import.meta.env.VITE_BACKEND_URL;
 
@@ -42,7 +43,7 @@ function ForgotPassword() {
                 setIsLoading(false);
             }
         } catch (error) {
-            toast.error('Failed to send OTP. Please try again.');
+            toast.error(error.response.data.message);
             setIsLoading(false);
             console.error('Error sending OTP:', error);
         }
@@ -145,7 +146,11 @@ function ForgotPassword() {
     };
 
     return (
+        <>
+        <ToastContainer />
+
         <div className='w-full h-auto flex flex-col mt-10 gap-8 md:flex-row-reverse md:mt-0'>
+            
             <div className='w-full h-[70vh] flex justify-center items-center px-5 lg:px-10 xl:px-20 md:h-auto sm:w-[70%] sm:mx-auto md:mx-0 md:w-[50%] lg:my-10'>
                 <div className='w-[90%] h-auto flex flex-col gap-2 lg:w-[80%]'>
                     <Link to='/signin' className='w-full h-auto mb-5'>
@@ -281,6 +286,7 @@ function ForgotPassword() {
 
             <Slider />
         </div>
+        </>
     );
 }
 

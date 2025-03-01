@@ -107,18 +107,20 @@ const DonationHistory = () => {
 
   return (
     <div className="relative w-full h-full bg-[#f3f4f6]">
-      {/* Search Bar */}
-      <div className="w-full h-[70px] z-[100] absolute top-4 px-4 md:px-20">
-            <Navbar />
-          </div>
+    {/* Search Bar */}
+    <div className="w-full h-[70px] z-[100] absolute top-4 px-4 lg:px-20">
+      <Navbar />
+    </div>
 
-      {/* Donations Table */}
-      <div className="w-full  h-[550px] flex flex-col gap-3 overflow-y-auto px-5 py-5 bg-[#fff4dc] rounded-3xl shadow-lg">
-        <div className="w-full px-4 md:px-20 rounded-lg pt-40 p-4">
-          <h2 className="text-2xl font-bold mb-6 text-amber-900 font-serif">
-            Donations by {user?.userData?.name}
-          </h2>
+    {/* Donations Table */}
+    <div className="w-full h-[550px] flex flex-col gap-3 overflow-y-auto px-5 py-5 bg-[#fff4dc] rounded-3xl shadow-lg">
+      <div className="w-full px-0 lg:px-20 rounded-lg pt-40">
+        <h2 className="text-2xl font-bold mb-6 text-amber-900 font-serif">
+          Donations by {user?.userData?.name}
+        </h2>
 
+        {/* Table for Large Screens */}
+        <div className="hidden md:block">
           {donations.length > 0 ? (
             <table className="w-full border-collapse overflow-y-scroll">
               <thead>
@@ -175,8 +177,53 @@ const DonationHistory = () => {
             <p className="text-gray-600">No donations found for this user.</p>
           )}
         </div>
+
+        {/* Cards for Mobile Screens */}
+        <div className="block md:hidden">
+          {donations.length > 0 ? (
+            donations.map((order) => (
+              <div
+                key={order._id || order.guestDonationId}
+                className="bg-white p-2 rounded-lg shadow-md mb-4"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-amber-900 font-medium">
+                    Order ID: {order._id || order.guestDonationId}
+                  </p>
+                </div>
+                <div>
+                <p className="text-amber-900 mb-2"> Amount:₹{order.amount}</p>
+
+                </div>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-amber-800">
+                    Payment:{" "}
+                    <span
+                      className={`px-2 py-1 rounded-full ${
+                        order.paymentStatus === "PAID"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-rose-100 text-rose-800"
+                      }`}
+                    >
+                      {order.paymentStatus || "PENDING"}
+                    </span>
+                  </p>
+                  <p className="text-amber-800">
+                    Status: {order.donationOrderStatus || "Completed"}
+                  </p>
+                </div>
+                <p className="text-amber-600 font-mono">
+                  Date: {order.createdAt}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-600">No donations found for this user.</p>
+          )}
+        </div>
       </div>
     </div>
+  </div>
   );
 };
 

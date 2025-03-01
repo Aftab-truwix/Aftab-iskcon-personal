@@ -94,7 +94,7 @@ const ShowStories = () => {
               </div>
             ))
           ) : (
-            <p className="text-gray-500">No events found.</p>
+            <p className="text-gray-500">No Stories found.</p>
           )}
         </div>
       </div>

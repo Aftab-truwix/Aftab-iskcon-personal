@@ -56,7 +56,7 @@ const ShowDonations = () => {
     <div>
       {
         singleDonation
-          ? <div className='w-full h-[450px] flex flex-col gap-3 overflow-y-scroll px-5 py-5 bg-white rounded-3xl'>
+          ? <div className='w-full h-[480px] flex flex-col gap-3 overflow-y-scroll px-5 py-5 bg-white rounded-3xl'>
             <div className='w-full h-auto flex justify-between items-center'>
               <h1 className='text-2xl font-bold'>{singleDonation.title}</h1>
               <button onClick={() => setSingleDonation(null)} className="text-gray-500 hover:text-gray-700">

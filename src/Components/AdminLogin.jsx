@@ -82,6 +82,7 @@ function AdminLogin() {
             if (response.status === 200 || response.status === 201) {
                 alert('Admin successfully logged in');
                 localStorage.setItem("isAuthenticated", "true"); // Store auth state
+                localStorage.setItem("token", JSON.stringify(response.data.token));
     
                 setUserDetails({ email: '', password: '' });
                 navigate('/admin-dashboard');

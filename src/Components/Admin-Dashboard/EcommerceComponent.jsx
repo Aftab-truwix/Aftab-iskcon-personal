@@ -47,7 +47,7 @@ export default function ProductDashboard() {
   }, []);
 
   return (
-    <div className="p-6 bg-white h-auto rounded-3xl shadow-md">
+    <div className="p-6 bg-white h-[380px] rounded-3xl shadow-md">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">Products</h2>

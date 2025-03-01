@@ -45,15 +45,10 @@ const AboutUs = () => {
       <div className="px-4 md:px-20 pt-4 relative z-50">
         <Navbar />
       </div>
-      {/* Heading with Animation */}
-      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 mt-20 text-[#2c3e50] animate-fade-in">
-        About <span className="text-yellow-500 animate-pulse">Us</span>
-      </h1>
-      {/* Paragraph Content Section with Animation */}
       <div className="px-4 md:px-20 animate-slide-in">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-8 animate-fade-in">
-            Welcome to ISKCON WaveCity Ghaziabad
+          <h2 className="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-8 font-prata mt-20 animate-fade-in" style={{ lineHeight: "1.4" }}>
+            Welcome to <br/> <span className="text-[#b64a07]">ISKCON WaveCity Ghaziabad </span> 
           </h2>
           <p className="text-gray-800 text-lg mb-8 animate-fade-in">
             The ISKCON WaveCity Ghaziabad temple is a divine abode dedicated to the worship of Lord Krishna and His divine associates. It stands as a testament to the vision of His Divine Grace A.C. Bhaktivedanta Swami Prabhupada, the Founder-Acharya of the International Society for Krishna Consciousness (ISKCON), who envisioned spreading the teachings of Lord Krishna and the practice of bhakti-yoga to every corner of the world.

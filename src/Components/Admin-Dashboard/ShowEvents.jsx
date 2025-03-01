@@ -56,7 +56,7 @@ const ShowEvents = () => {
         </div> */}
 
         {/* Events Grid */}
-        <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-[400px]">
+        <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-[480px]">
           {events.length > 0 ? (
             events.map((event) => (
               <div

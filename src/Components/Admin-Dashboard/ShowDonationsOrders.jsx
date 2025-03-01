@@ -85,7 +85,7 @@ const ShowDonationsOrders = () => {
             </div>
 
             {/* Orders Table */}
-            <div className="w-full h-[440px] flex flex-col gap-3 overflow-y-auto px-5 py-5 bg-[#fff4dc] rounded-3xl shadow-lg">
+            <div className="w-full h-[480px] flex flex-col gap-3 overflow-y-auto px-5 py-5 bg-[#ffffff] rounded-3xl shadow-lg">
                 <div className="w-full max-w-6xl mx-auto rounded-lg p-4">
                     <h2 className="text-2xl font-bold mb-6 text-amber-900 font-serif">Donations Orders History</h2>
 

@@ -174,8 +174,9 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    if( localStorage.getItem("isAuthenticated") === "true") localStorage.removeItem("isAuthenticated");
     setHasAccessToken(false);
-    window.location.reload();
+    window.location.href = "/";
   };
 
   useEffect(() => {

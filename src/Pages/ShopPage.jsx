@@ -8,24 +8,6 @@ import Section3 from "../Components/ShopPageComponents/Section3";
 import { useNavigate } from "react-router-dom";
 
 function ShopPage() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsLoaded(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 } // Load when 10% of the element is visible
-    );
-
-    if (ref.current) observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, []);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -38,17 +20,15 @@ function ShopPage() {
   return (
     <>
       <div
-        ref={ref}
-        className={` transition-opacity duration-500 ${
-          isLoaded ? "opacity-100" : "opacity-40"
-        }`}
-        style={{
-          backgroundImage: isLoaded ? `url(${Image1})` : "none",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-      >
+                className="w-full h-screen relative"
+                style={{
+                    backgroundImage: `url(${Image1})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                }}
+            >
+              <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="px-4 md:px-20 pt-4 relative z-50">
           <Navbar />
         </div>

@@ -54,7 +54,7 @@ const ShowBlogs = () => {
         </div> */}
 
         {/* Events Grid */}
-        <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-[400px]">
+        <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-[480px]">
           {blogs.length > 0 ? (
             blogs.map((blog) => (
               <div

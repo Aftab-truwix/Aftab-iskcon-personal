@@ -6,6 +6,7 @@ import { CartContext } from "../Context/CartContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { use } from "react";
 
 const backend = import.meta.env.VITE_BACKEND_URL;
 
@@ -220,6 +221,10 @@ const Checkout = () => {
       console.log("error while order placement", error);
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div

@@ -57,7 +57,8 @@ function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
-    window.location.reload();
+    localStorage.removeItem("token");
+    window.location.href = "/"
   };
 
   const menuItems = [
@@ -93,7 +94,7 @@ function AdminDashboard() {
       case "Dashboard":
         return (
           <div className="flex flex-col">
-            <span className="text-4xl font-bold">Dashboard </span>
+            <span className="text-4xl font-bold font-prata">Dashboard </span>
             <div>
               <StatsCard />
             </div>
@@ -106,7 +107,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Donations </span>
+              <span className="text-4xl font-bold font-prata">Donations </span>
               <span className="flex gap-4">
                 <button
                   className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -143,7 +144,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Media </span>
+              <span className="text-4xl font-bold font-prata">Media </span>
               <span className="flex gap-4">
                 <button
                   className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -180,7 +181,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Offline Classes </span>
+              <span className="text-4xl font-bold font-prata">Offline Classes </span>
               <span className="flex gap-4">
                 <button
                   className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -217,7 +218,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Events</span>
+              <span className="text-4xl font-bold font-prata">Events</span>
               <span className="flex gap-4">
                 <button
                   className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -254,7 +255,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Blogs</span>
+              <span className="text-4xl font-bold font-prata">Blogs</span>
               <span className="flex gap-4">
                 <button
                   className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -287,7 +288,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Products Orders</span>
+              <span className="text-4xl font-bold font-prata">Products Orders</span>
             </div>
             <div className="mt-4">
               <ShowOrders />
@@ -298,7 +299,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Donations Orders</span>
+              <span className="text-4xl font-bold font-prata">Donations Orders</span>
             </div>
             <div className="mt-4">
               <ShowDonationsOrders />
@@ -310,7 +311,7 @@ function AdminDashboard() {
         return (
           <div className="flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-4xl font-bold">Stories</span>
+              <span className="text-4xl font-bold font-prata">Stories</span>
               <span className="flex gap-4">
                 <button
                   className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -346,7 +347,7 @@ function AdminDashboard() {
       case "Stat Control":
         return (
           <div className="flex flex-col">
-            <span className="text-4xl font-bold">Stats Control </span>
+            <span className="text-4xl font-bold font-prata">Stats Control </span>
             <div>
               <StatsCard />
             </div>
@@ -358,7 +359,7 @@ function AdminDashboard() {
       case "E-Commerce":
         return (
           <div className="flex flex-col">
-            <span className="text-4xl font-bold">E-Commerce </span>
+            <span className="text-4xl font-bold font-prata">E-Commerce </span>
             <div>
               <StatsCard />
             </div>
@@ -486,12 +487,10 @@ function AdminDashboard() {
                 {/* User Profile */}
                 <div className="flex items-center gap-1 cursor-pointer">
                   <div
-                    className="w-8 h-8 rounded-full bg-orange-500 cursor-pointer"
+                    className="w-12 h-12 rounded-full text-xl flex justify-center items-center font-prata font-bold text-white bg-orange-500 cursor-pointer"
                     onClick={toggleDropdown}
-                  ></div>
+                  >AD</div>
                   <span>
-                    {" "}
-                    <IoIosArrowDown className="text-[#84818a] cursor-pointer" />
                   </span>
                 </div>
                 {isDropdownOpen && (

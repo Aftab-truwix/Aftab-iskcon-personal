@@ -48,16 +48,16 @@ const ShowClasses =({  refreshClasses })=> {
   return (
     <div>
       <div className="w-full p-6 bg-white h-auto rounded-3xl shadow-md">
-        <div className="w-full grid grid-cols-3 gap-6 overflow-y-scroll h-[250px]">
+        <div className="w-full grid grid-cols-3 gap-6 overflow-y-scroll h-[490px]">
           {classes.length > 0 ? (
             classes.map((classes) => (
               <div
                 key={classes._id}
-                className="bg-white p-4 rounded-[16px] shadow-md border-2 border-[#D1C7C74D] flex flex-col items-center space-x-4"
+                className="bg-white p-4 rounded-[16px] shadow-md border-2 h-[250px] border-[#D1C7C74D] flex flex-col items-center space-x-4"
               >
-                <div className="flex-1">
+                <div className="w-full">
                   <h3 className="text-lg font-bold">{classes.title}</h3>
-                  <p className="text-gray-600 text-sm my-2">
+                  <p className="text-gray-600 h-[60px] text-sm my-2">
                     {classes.description.length > 100
                       ? classes.description.slice(0, 100) + "..."
                       : classes.description}
