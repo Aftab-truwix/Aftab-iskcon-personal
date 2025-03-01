@@ -79,7 +79,7 @@ export default function StoryViewer({ onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-      <div className="relative w-[90vw] max-w-[500px] h-screen max-h-[800px] bg-black rounded-lg overflow-hidden">
+      <div className="relative w-[90vw] max-w-[500px] h-screen max-h-[800px] bg-white rounded-lg overflow-hidden">
         {/* Progress Bar */}
         <div className="absolute top-4 left-4 right-4 flex space-x-1 z-50">
           {story?.map((_, index) => (
@@ -135,10 +135,10 @@ export default function StoryViewer({ onClose }) {
           {/* Text Overlay */}
           {story.length > 0 && story[currentIndex] && (
             <>
-              <div className="absolute bottom-10 w-full text-center text-white text-xl font-bold">
+              <div className="absolute bottom-60 w-full left-6 text-white text-3xl font-bold">
                 {story[currentIndex].title}
               </div>
-              <div className="absolute bottom-2 w-full text-center text-white text-sm">
+              <div className="w-[85%] absolute bottom-4 left-6  text-white text-sm">
                 {story[currentIndex].description}
               </div>
             </>
