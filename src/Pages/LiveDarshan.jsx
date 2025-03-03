@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar';
 import DonationCircle from '../Components/DonationCircle';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+import { ClipLoader } from 'react-spinners';
 const backend = import.meta.env.VITE_BACKEND_URL;
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY 
 const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID
@@ -37,6 +37,7 @@ function LiveDarshan() {
         }
       }
     } catch (error) {
+      toast.dismiss()
       console.log("Error while fetching live video", error);
       toast.error("Failed to fetch live video!");
     }
@@ -65,9 +66,9 @@ function LiveDarshan() {
                 referrerPolicy="origin"
               ></iframe>
             </div>
-            : <div className='w-full h-80 flex justify-center items-center'>
-              <span className='font-prata text-2xl lg:text-4xl'>Please Wait.....Loading............</span>
-            </div>
+            : <div className='w-full h-80 sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[800px] mt-5 lg:mt-8 bg-black blur-sm flex justify-center items-center'>
+            <ClipLoader color="#ffffff" loading={true} size={50} />
+          </div>
         }
       </div>
       <DonationCircle />

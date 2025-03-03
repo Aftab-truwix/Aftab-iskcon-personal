@@ -251,7 +251,8 @@ const MembershipPage = () => {
       {/* Popup */}
       {isPopupOpen && selectedCard && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-5xl w-full">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto hide-scroll">
+            {/* Add max-h and overflow-y-auto */}
             <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
             <p className="text-lg mb-4">{selectedCard.price}</p>
             <ul className="list-disc pl-5 mb-4">
@@ -268,7 +269,7 @@ const MembershipPage = () => {
             )}
             <button
               onClick={handleClosePopup}
-              className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md"
+              className="bg-red-500 text-white font-semibold w-[250px] md:w-[200px] py-2 px-4 rounded-md"
             >
               Close
             </button>

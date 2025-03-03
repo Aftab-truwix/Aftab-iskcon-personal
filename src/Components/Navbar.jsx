@@ -37,6 +37,17 @@ const Navbar = () => {
   const [donationDropdown, setDonationDropdown] = useState(false);
   const location = useLocation();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+
+  // Function to handle checkbox change
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleCheckboxChange2 = () => {
+    setIsChecked2(!isChecked2);
+  };
 
   const handleDonationClick = () => {
     setDonationDropdown(!donationDropdown);
@@ -174,7 +185,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    if( localStorage.getItem("isAuthenticated") === "true") localStorage.removeItem("isAuthenticated");
+    if (localStorage.getItem("isAuthenticated") === "true")
+      localStorage.removeItem("isAuthenticated");
     setHasAccessToken(false);
     window.location.href = "/";
   };
@@ -841,8 +853,17 @@ const Navbar = () => {
         {cartItems.length > 0 && (
           <div className="w-full h-auto flex flex-col">
             <div className="w-full h-auto flex gap-2 items-center">
-              <input type="checkbox" className="w-3" id="checkout" />
-              <label htmlFor="checkout" className="text-xs">
+              <input
+                type="checkbox"
+                className="w-4 h-4"
+                id="checkout"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+              />
+              <label
+                htmlFor="checkout"
+                className={`text-base ${isChecked ? "font-bold" : ""}`} // Apply 'font-bold' if checked
+              >
                 Checkout as Guest
               </label>
             </div>
@@ -889,9 +910,9 @@ const Navbar = () => {
       </div>
 
       {/* Donation Sidebar with Smooth Animation */}
-     
+
       <div
-        className={`fixed font-poppins z-[100] h-[250px] flex flex-col overflow-y-scroll scrollbar-hide left-0 bottom-0 w-full bg-white shadow-lg px-6 py-3 transform transition-transform duration-300 ease-in-out  
+        className={`fixed font-poppins z-[100] h-[180px] flex flex-col overflow-y-scroll scrollbar-hide left-0 bottom-0 w-full bg-white shadow-lg px-6 py-3 transform transition-transform duration-300 ease-in-out  
         ${donationSidebar ? "translate-y-0" : "translate-y-full"}`}
         style={{
           scrollbarWidth: "none",
@@ -961,7 +982,7 @@ const Navbar = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center text-lg font-semibold h-80 flex justify-center items-center">
+              <p className="text-center text-lg font-semibold h-80 ">
                 Cart is Empty
               </p>
             )}
@@ -971,17 +992,21 @@ const Navbar = () => {
           {donationCartItems.length > 0 && (
             <div className="w-full md:w-1/2 flex flex-col gap-4">
               {/* Checkout as Guest Checkbox */}
-              <div className="flex items-center gap-2">
+              <div className="w-full h-auto flex gap-2 items-center">
                 <input
                   type="checkbox"
-                  className="w-3 cursor-pointer"
+                  className="w-4 h-4"
                   id="checkout"
+                  checked={isChecked2}
+                  onChange={handleCheckboxChange2}
                 />
-                <label htmlFor="checkout" className="text-xs cursor-pointer">
+                <label
+                  htmlFor="checkout"
+                  className={`text-base ${isChecked2 ? "font-bold" : ""}`} // Apply 'font-bold' if checked
+                >
                   Checkout as Guest
                 </label>
               </div>
-
               {/* Divider */}
               <div className="h-[1px] bg-gray-400 w-full"></div>
 
@@ -1006,7 +1031,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-     
 
       {/* Backdrop for Cart Sidebar */}
       {cartSidebar && (
@@ -1015,14 +1039,6 @@ const Navbar = () => {
           onClick={() => setCartSidebar(false)}
         ></div>
       )}
-
-      {/*Backdrop for Donation Sidebar Prevents clicking on the main content while the sidebar is open */}
-      {/* {donationSidebar && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-50"
-          onClick={() => setDonationSidebar(false)}
-        ></div>
-      )} */}
     </>
   );
 };

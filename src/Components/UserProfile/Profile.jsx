@@ -33,7 +33,11 @@ function Profile() {
 
       const data = await response.json();
       setUser(data);
-      
+      setFormData((prev) => ({
+        ...prev,
+        name: data?.userData?.name || "",
+        email: data?.userData?.email || "",
+      }));
     } catch (error) {
       console.error("❌ Error fetching user data:", error);
     }
@@ -96,7 +100,6 @@ function Profile() {
   const [state, setState] = useState("");
   const [pincode, setPincode] = useState("");
 
-
   // Relationships
   const [relationships, setRelationships] = useState([
     { relation: "", name: "", mobile: "", dob: "" },
@@ -112,6 +115,8 @@ function Profile() {
   const [drivingLicense, setDrivingLicense] = useState("");
   const [voterId, setVoterId] = useState("");
   const [otherId, setOtherId] = useState("");
+
+  const [formData, setFormData] = useState({});
 
   // Handle Relationship Changes
   const handleRelationshipChange = (index, event) => {
@@ -150,14 +155,21 @@ function Profile() {
     setOccasions(newOccasions);
   };
 
+  const handlePincodeChange = (value) => {
+    // Allow only numeric input and limit to 6 digits
+    if (/^\d{0,6}$/.test(value)) {
+      setPincode(value);
+    }
+  };
+
   // Handle Form Submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = {
       personalDetails: {
-        name: user?.userData?.name,
-        email: user?.userData?.email,
+        name: formData.name,
+        email: formData.email,
         mobile,
         whatsappNumber,
         dob,
@@ -172,7 +184,6 @@ function Profile() {
       idProof: { aadhaarNumber, drivingLicense, voterId, otherId },
     };
 
-
     try {
       const response = await fetch(`${backend}/admin/profile/create`, {
         method: "POST",
@@ -181,7 +192,6 @@ function Profile() {
         },
         body: JSON.stringify(formData),
       });
-
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -255,7 +265,7 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md"
-              value={name}
+              value={formData.name}
               onChange={(e) => setName(e.target.value)}
             />
             <TextField
@@ -265,7 +275,7 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md"
-              value={email}
+              value={formData.email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
@@ -427,13 +437,21 @@ function Profile() {
               </FormControl>
               <TextField
                 label="Pincode"
-                type="number"
+                type="text" 
                 variant="outlined"
                 fullWidth
                 margin="normal"
                 className="bg-white rounded-md"
                 value={pincode}
-                onChange={(e) => setPincode(e.target.value)}
+                onChange={(e) => handlePincodeChange(e.target.value)}
+                inputProps={{
+                  maxLength: 6, 
+                  inputMode: "numeric", 
+                }}
+                helperText={
+                  pincode.length === 6 ? "" : "Pincode must be exactly 6 digits"
+                } 
+                error={pincode.length !== 6} 
               />
             </div>
           </div>
