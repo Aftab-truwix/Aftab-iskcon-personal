@@ -168,14 +168,14 @@ function AdminLogin() {
               >
                 Sign In
               </button>
-              <p className="w-full h-auto flex justify-end">
+              {/* <p className="w-full h-auto flex justify-end">
                 <Link
                   to="/forgot-password"
                   className="text-[#3F3F3F80] text-sm"
                 >
                   Forgot Password
                 </Link>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

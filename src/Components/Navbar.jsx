@@ -20,6 +20,7 @@ import { IoNotifications } from "react-icons/io5";
 import darshan from "../assets/darshan.svg";
 import { useLocation } from "react-router-dom";
 import StoryViewer from "../Components/Strory.jsx";
+import DonationCartPopup from "./DonationCartPopup.jsx";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,6 +40,7 @@ const Navbar = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
+  const [isDonationPopupOpen, setIsDonationPopupOpen] = useState(false);
 
   // Function to handle checkbox change
   const handleCheckboxChange = () => {
@@ -177,6 +179,8 @@ const Navbar = () => {
     clearDonationCart,
     removeFromDonationCart,
     getDonationCartTotal,
+  deleteItemFromCart 
+    
   } = useContext(DonationCartContext);
 
   const toggleMenu = () => {
@@ -912,53 +916,102 @@ const Navbar = () => {
       {/* Donation Sidebar with Smooth Animation */}
 
       <div
-        className={`fixed font-poppins z-[100] h-[180px] flex flex-col overflow-y-scroll scrollbar-hide left-0 bottom-0 w-full bg-white shadow-lg px-6 py-3 transform transition-transform duration-300 ease-in-out  
+        className={`fixed font-poppins z-[100] h-auto md:h-[80px] flex flex-col  border-t border-gray-400 left-0 bottom-0 w-full bg-[#fde3b6] shadow-lg px-6 pb-2 transform transition-transform duration-300 ease-in-out  
         ${donationSidebar ? "translate-y-0" : "translate-y-full"}`}
         style={{
           scrollbarWidth: "none",
         }}
       >
-        <button
+        {/* <button
           className="absolute top-3 right-3 text-gray-600 hidden md:block"
           onClick={() => setDonationSidebar(false)}
         >
           <IoMdClose size={40} />
-        </button>
-        <button
+        </button> */}
+        {/* <button
           className="absolute top-3 right-3 text-gray-600 md:hidden"
           onClick={() => setDonationSidebar(false)}
         >
           <IoMdClose size={28} />
-        </button>
-        <div className="w-[90%] md:w-[95%] h-auto flex justify-between items-center mb-4">
-          <h2 className="text-xl md:text-3xl font-bold">Donation Cart</h2>
-
-          <span
+        </button> */}
+        <div className="w-full h-auto md:h-[80px] flex justify-between items-center">
+          {/* <span
             className="flex gap-2 text-red-500 items-center text-sm md:text-base font-semibold cursor-pointer"
             onClick={clearDonationCart}
           >
             Clear Cart
             <RiDeleteBin5Fill size={20} />
-          </span>
+          </span> */}
         </div>
-        <div className="w-full flex flex-col md:flex-row  gap-10">
-          {/* Donation Cart Section */}
-          <div
-            className="w-full md:w-1/2 flex flex-col gap-2 justify-start items-start overflow-y-auto"
-            style={{ maxHeight: "240px" }} // Fixed height for ~4 items
-          >
-            {donationCartItems.length > 0 ? (
+        <div className="w-full">
+           {isDonationPopupOpen && (
+                <DonationCartPopup
+                  donationCartItems={donationCartItems}
+                  onClose={() => setIsDonationPopupOpen(false)}
+                  addToCart={addToDonationCart}
+                  removeFromCart={removeFromDonationCart}
+                  deleteFromCart={deleteItemFromCart}
+                />
+              )}
+          {donationCartItems.length > 0 ? (
+            <div className="w-full flex  items-center">
+              
+              <div className="w-full flex flex-col md:flex-row justify-between gap-6 md:gap-0 items-center px-4 lg:px-20">
+                <div className="w-full md:w-1/2 flex flex-col gap-2" onClick={() => setIsDonationPopupOpen(true)}>
+                  {" "}
+                  <h2 className="text-lg md:text-lg text-center md:text-start font-bold">
+                    Donation Cart
+                  </h2>
+                  <h3 className="w-full text-lg text-center md:text-start font-semibold sm:text-base xl:text-lg cursor-pointer hover:underline">
+                    {donationCartItems[0].title}
+                    {donationCartItems.length > 1 && (
+                      <span
+                        
+                        className="text-gray-500 font-normal"
+                      >
+                        {" "}
+                        +{donationCartItems.length - 1} More
+                      </span>
+                    )}
+                  </h3>
+                </div>
+                <div className="w-full md:w-1/2 flex justify-end gap-8">
+                  <div className="flex flex-col gap-2">
+                    <p>Total Amount:</p>
+                    <p className="text-xs font-semibold sm:text-sm xl:text-base">
+                      ₹ {getDonationCartTotal()}
+                    </p>
+                  </div>
+                  <Link
+                    to="/donation-checkout"
+                    className="w-[150px] bg-[#EB852C] rounded-lg text-white h-auto flex justify-center items-center py-1 md:hover:bg-[#ffab62]"
+                  >
+                    Pay Now
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <p>No items in the cart</p>
+          )}
+          {/* {donationCartItems.length > 0 ? (
               donationCartItems.map((item) => (
                 <div key={item.id} className="w-full flex items-center">
-                  <div className="w-full flex flex-col border border-gray-300 rounded-lg p-2">
+                  <div className="w-full flex ">
                     <div className="w-full flex justify-between items-center">
                       <h3 className="w-[50%] md:w-[60%] text-xs font-semibold sm:text-base xl:text-lg">
-                        {item.title}
-                      </h3>
-                      <p className="text-xs font-semibold w-[20%] md:w-[15%] sm:text-sm xl:text-base">
+                        {donationCartItems[0].title}
+                        {donationCartItems.length > 1 && (
+                          <span className="text-gray-500 font-normal">
+                            {" "}
+                            +{donationCartItems.length - 1} More
+                          </span>
+                        )}
+                      </h3> */}
+          {/* <p className="text-xs font-semibold w-[20%] md:w-[15%] sm:text-sm xl:text-base">
                         ₹ {item.amount * item.quantity}
-                      </p>
-                      <div className="w-[20%] h-auto flex justify-end">
+                      </p> */}
+          {/* <div className="w-[20%] h-auto flex justify-end">
                         <div className="px-2 py-1 flex gap-2 text-xs items-center justify-center bg-[#ECA242] rounded-lg text-white sm:px-3 sm:text-base sm:rounded-xl sm:gap-3 xl:px-4 xl:py-1">
                           <span
                             onClick={() => removeFromDonationCart(item)}
@@ -976,8 +1029,8 @@ const Navbar = () => {
                             +
                           </span>
                         </div>
-                      </div>
-                    </div>
+                      </div> */}
+          {/* </div>
                   </div>
                 </div>
               ))
@@ -986,12 +1039,12 @@ const Navbar = () => {
                 Cart is Empty
               </p>
             )}
-          </div>
+              */}
 
           {/* Donation Summary & Checkout Section */}
-          {donationCartItems.length > 0 && (
+          {/* {donationCartItems.length > 0 && (
             <div className="w-full md:w-1/2 flex flex-col gap-4">
-              {/* Checkout as Guest Checkbox */}
+             
               <div className="w-full h-auto flex gap-2 items-center">
                 <input
                   type="checkbox"
@@ -1002,15 +1055,13 @@ const Navbar = () => {
                 />
                 <label
                   htmlFor="checkout"
-                  className={`text-base ${isChecked2 ? "font-bold" : ""}`} // Apply 'font-bold' if checked
+                  className={`text-base ${isChecked2 ? "font-bold" : ""}`} 
                 >
                   Checkout as Guest
                 </label>
               </div>
-              {/* Divider */}
               <div className="h-[1px] bg-gray-400 w-full"></div>
 
-              {/* Donation Summary */}
               <div className="flex flex-col gap-2">
                 <h1 className="font-semibold lg:text-lg xl:text-2xl">
                   Donation Summary
@@ -1021,14 +1072,13 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Checkout Button */}
               <Link to="/donation-checkout" className="w-full">
                 <button className="w-full bg-[#EB852C] rounded-3xl text-white py-2 hover:bg-[#ffab62] transition">
                   Checkout
                 </button>
               </Link>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 

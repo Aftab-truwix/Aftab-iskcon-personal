@@ -22,7 +22,6 @@ import CreateEvents from "./Components/Admin-Dashboard/Events/CreateEvents.jsx";
 import AdminSingleEvent from "./Components/Admin-Dashboard/Events/AdminSingleEvent.jsx";
 import BlogsPage from "./Components/BlogPageComponent/BlogPage.jsx";
 import ContactPage from "./Components/ContactPage.jsx";
-import Cart from "./Components/Cart.jsx";
 import CreateBlogs from "./Components/Admin-Dashboard/Blogs/CreateBlogs.jsx";
 import AdminSingleBlog from "./Components/Admin-Dashboard/Blogs/AdminSingleBlog.jsx";
 import AdminSingleService from "./Components/Admin-Dashboard/Services/AdminSingleService.jsx";
@@ -190,7 +189,6 @@ const MainApp = () => {
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/blogs/single-blog/:id" element={<SingleBlog />} />
           <Route path="/contacts" element={<ContactPage />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/details/:id" element={<CardDetails />} />
           <Route path="/donation" element={<DonationPage />} />

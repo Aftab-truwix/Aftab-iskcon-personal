@@ -52,6 +52,10 @@ export const DonationCartProvider = ({ children }) => {
     }
   };
 
+  const deleteItemFromCart = (item) => {
+    setDonationCartItems((prevItems) => prevItems.filter(cartItem => cartItem.id !== item.id));
+};
+
   // Clear the entire donation cart
   const clearDonationCart = () => {
     setDonationCartItems([]);
@@ -83,6 +87,7 @@ export const DonationCartProvider = ({ children }) => {
         removeFromDonationCart,
         clearDonationCart,
         getDonationCartTotal,
+        deleteItemFromCart
       }}
     >
       {children}
