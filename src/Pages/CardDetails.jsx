@@ -8,7 +8,7 @@ import about4 from "../assets/bout4.webp";
 
 const data = [
   {
-    id: 1,
+    id: "about-srila-prabhupada",
     title: "About Srila Prabhupada",
     image: about1,
     description: `"He was a genuine holy person with enormous integrity and compassion, and he had a powerful impact on those who met him. He never claimed authority and respect for himself; what he said and did was always in the name of Krishna." – Dr. Thomas J. Hopkins. <br><br> 
@@ -56,7 +56,7 @@ const data = [
   },
   
   {
-    id: 2,
+    id: "history-of-iskcon",
     title: "History Of ISKCON",
     image: about2,
     description: "Known as the Hare Krishna movement on the western side, ISKCON is better recognized as a monotheistic subdivision of the famous Gaudiya Vaishnava religious tradition. Mainly, ISKCON believes in the teaching of Lord Krishna. Chanting the sacred names of God is an essential practice in the Krishna Consciousness. It is one of the major processes of the spiritual service. It is helpful in bringing peace and happiness by enlivening the relationship of humans with God.",
@@ -77,7 +77,7 @@ const data = [
   - <strong>Present Day:</strong> ISKCON now operates more than 500 centers globally, continuing its mission to spread the teachings of Lord Krishna and promote spiritual consciousness worldwide.`
 },
   {
-    id: 3,
+    id: "our-philosophy",
     title: "Our Philosophy",
     image: about3,
     description: "The teachings of the International Society for Krishna Consciousness (ISKCON) are based on ancient Vaishnava scriptures: Srimad-Bhagavatam (commentary on the Vedas), Srimad Bhagavad-gita (the personal teachings of Lord Krishna), and Sri Chaitanya-Charitamrta (the teachings of Lord Chaitanya). <br></br>The basic tenet of these teachings is that each living entity is an eternal spirit soul and has a distinct relationship with God, Krishna.",
@@ -103,7 +103,7 @@ Additionally, they commit to chanting a minimum of 16 rounds daily of the Hare K
 
   },
   {
-    id: 4,
+    id: "hare-krishna-movement",
     title: "Hare Krishna Movement",
     image: about4,
     description: "<strong>Learn the history of ISKCON, popularly known as Hare Krishna Movement.</strong><br><br> Hare Krishna chanting is a sure way to get in touch with the divine. Also known as the Maha Mantra, chanting this mantra brings us closer to God. A very important part of the Hare Krishna Movement, the Hare Krishna Chant is definitely synonymous with divinity. But what is the Hare Krishna Movement, and what does chanting God’s name really do? Here, we shall answer such questions for you.",
@@ -140,7 +140,7 @@ Additionally, they commit to chanting a minimum of 16 rounds daily of the Hare K
 
 const CardDetails = () => {
   const { id } = useParams();
-  const card = data.find((item) => item.id === parseInt(id));
+  const card = data.find((item) => item.id === (id));
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -154,12 +154,12 @@ const CardDetails = () => {
       <div className="px-4 md:px-20 py-20">
         <div className="flex flex-col md:flex-row gap-10 items-center">
         <img
-          src={card.image}
-          alt={card.title}
+          src={card?.image}
+          alt={card?.title}
           className="w-full h-auto md:h-96 object-contain rounded-lg mb-6"
         />
         <div>
-        <h1 className="text-3xl font-bold mb-4 font-prata">{card.title}</h1>
+        <h1 className="text-3xl font-bold mb-4 font-prata">{card?.title}</h1>
         <p className="text-lg font-nunito" dangerouslySetInnerHTML={{ __html: card.description }}></p>
         </div>
         </div>

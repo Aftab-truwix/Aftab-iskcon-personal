@@ -8,22 +8,22 @@ import about4 from "../assets/bout4.webp";
 
 const data = [
   {
-    id: 1,
+    id: "about-srila-prabhupada",
     title: "About Srila Prabhupada",
     image: about1,
   },
   {
-    id: 2,
+    id: "history-of-iskcon",
     title: "History Of ISKCON",
     image: about2,
   },
   {
-    id: 3,
+    id: "our-philosophy",
     title: "Our Philosophy",
     image: about3,
   },
   {
-    id: 4,
+    id: "hare-krishna-movement",
     title: "Hare Krishna Movement",
     image: about4,
   },

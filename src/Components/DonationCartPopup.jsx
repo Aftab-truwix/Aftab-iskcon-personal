@@ -29,7 +29,7 @@ const DonationCartPopup = ({ donationCartItems, onClose, addToCart, removeFromCa
           {donationCartItems.length > 0 ? (
             donationCartItems.map((item, index) => (
               <div key={item.id} className="flex justify-between items-center border p-3 rounded-lg border-orange-400">
-                <h3 className="w-[50%] md:w-[60%] text-xs font-semibold sm:text-base xl:text-lg">
+                <h3 className="w-[30%] md:w-[60%] text-xs font-semibold sm:text-base xl:text-lg">
                   {item.title}
                 </h3>
                 <p className="text-xs font-semibold w-[20%] md:w-[15%] sm:text-sm xl:text-base">
@@ -42,7 +42,7 @@ const DonationCartPopup = ({ donationCartItems, onClose, addToCart, removeFromCa
                   >
                     -
                   </button>
-                  <span className="font-semibold w-[25px] md:w-[50px] text-center xl:text-lg">
+                  <span className="font-semibold w-[50px] text-center xl:text-lg">
                     {item.quantity}
                   </span>
                   <button 
@@ -56,7 +56,7 @@ const DonationCartPopup = ({ donationCartItems, onClose, addToCart, removeFromCa
                 <span>
                     <button 
                       onClick={() => deleteFromCart(item)} 
-                      className="w-4 h-4 md:pl-0 flex justify-center items-center rounded-full border border-white sm:w-5 sm:h-5 cursor-pointer"
+                      className="w-4 h-4 flex justify-center items-center rounded-full border border-white sm:w-5 sm:h-5 cursor-pointer"
                     >
                       <BsTrash3 />
                     </button>

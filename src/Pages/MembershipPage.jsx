@@ -251,11 +251,11 @@ const MembershipPage = () => {
       {/* Popup */}
       {isPopupOpen && selectedCard && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto hide-scroll">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-5xl w-full ">
             {/* Add max-h and overflow-y-auto */}
             <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
             <p className="text-lg mb-4">{selectedCard.price}</p>
-            <ul className="list-disc pl-5 mb-4">
+            <ul className="list-disc pl-5 mb-4 max-h-[60vh] overflow-y-auto hide-scroll">
               {selectedCard.facilities.map((facility, index) => (
                 <li key={index} className="text-gray-700">
                   {facility}
