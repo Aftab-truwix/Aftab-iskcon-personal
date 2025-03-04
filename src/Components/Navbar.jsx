@@ -1,6 +1,6 @@
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo.webp";
 import { Link, NavLink } from "react-router-dom";
-import cart from "../assets/cart.svg";
+import cart from "../assets/cart.webp";
 import { useState, useEffect, useContext } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -17,7 +17,7 @@ import sun from "../assets/sun.gif";
 import moon from "../assets/moon.gif";
 import puja from "../assets/puja.webp";
 import { IoNotifications } from "react-icons/io5";
-import darshan from "../assets/darshan.svg";
+import darshan from "../assets/darshan.webp";
 import { useLocation } from "react-router-dom";
 import StoryViewer from "../Components/Strory.jsx";
 import DonationCartPopup from "./DonationCartPopup.jsx";

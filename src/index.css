@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins.woff2") format("woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prata";
+  src: url("/fonts/prata.woff2") format("woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunito-sans.woff2") format("woff2");
+  font-style: normal;
+}
+
 
 html {
   scroll-behavior: smooth;

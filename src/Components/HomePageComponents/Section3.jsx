@@ -2,8 +2,8 @@ import React from 'react'
 import BgOne from '../../assets/bg1.webp'
 import CalendorIcon from '../../assets/calenderIcon.webp'
 import COmmentIcon from '../../assets/commentIcon.webp'
-import Blogimg1 from '../../assets/blog1.svg'
-import Blogimg2 from '../../assets/blog2.svg'
+import Blogimg1 from '../../assets/blog1.webp'
+import Blogimg2 from '../../assets/blog2.webp'
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";

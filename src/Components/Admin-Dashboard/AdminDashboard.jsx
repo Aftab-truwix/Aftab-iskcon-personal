@@ -1,6 +1,6 @@
 import React from "react";
 import signUpImage from "../../assets/signUpImage.webp";
-import adminlogo from "../../assets/adminlogo.svg";
+import adminlogo from "../../assets/adminlogo.webp";
 import { useState } from "react";
 import {
   FaRegChartBar,

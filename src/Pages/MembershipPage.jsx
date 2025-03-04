@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Circlebg from "../assets/circlebg.webp";
 import Navbar from "../Components/Navbar";
-import bronge from "../assets/bronze.svg";
-import silver from "../assets/silver.svg";
-import gold from "../assets/gold.svg";
-import diamond from "../assets/diamond.svg";
-import platinum from "../assets/platinum.svg";
-import Super from "../assets/super.svg";
+import bronge from "../assets/bronze.webp";
+import silver from "../assets/silver.webp";
+import gold from "../assets/gold.webp";
+import diamond from "../assets/diamond.webp";
+import platinum from "../assets/platinum.webp";
+import Super from "../assets/super.webp";
 
 const MembershipPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);

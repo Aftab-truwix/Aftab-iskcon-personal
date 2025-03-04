@@ -3,9 +3,9 @@ import BgOne from "../../assets/bg1.webp";
 import TempleIcon from "../../assets/templeIcon.webp";
 import LoveFest from "../../assets/loveFestIcon.webp";
 import PhilosphyIcon from "../../assets/philosophyIcon.webp";
-import Border1 from "../../assets/section1border1.svg";
-import Border2 from "../../assets/section1border2.svg";
-import ItemBg from "../../assets/itemBg.svg";
+import Border1 from "../../assets/section1border1.webp";
+import Border2 from "../../assets/section1border2.webp";
+import ItemBg from "../../assets/itemBg.webp";
 import Krishnaji from "../../assets/krishna2.webp";
 import { Link } from "react-router-dom";
 

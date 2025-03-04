@@ -1,5 +1,5 @@
 import React from 'react'
-import CardBorder from '../../assets/cardBorder.svg'
+import CardBorder from '../../assets/cardBorder.webp'
 import ProductBook from '../../assets/productBook.webp'
 import ProductShadow from '../../assets/productShadow.webp'
 import { FaStar } from "react-icons/fa";

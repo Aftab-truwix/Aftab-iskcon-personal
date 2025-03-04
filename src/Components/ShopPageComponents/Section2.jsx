@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Category1 from '../../assets/category1.svg';
+import Category1 from '../../assets/category1.webp';
 import Category2 from '../../assets/grocery.webp';
-import Category3 from '../../assets/category3.svg';
-import Category4 from '../../assets/category4.svg';
+import Category3 from '../../assets/category3.webp';
+import Category4 from '../../assets/category4.webp';
 import Category5 from '../../assets/cloth.webp'; // New category icon for Clothes
-import Border1 from '../../assets/section1border1.svg';
-import Border2 from '../../assets/section1border2.svg';
+import Border1 from '../../assets/section1border1.webp';
+import Border2 from '../../assets/section1border2.webp';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 import { useNavigate } from 'react-router-dom';

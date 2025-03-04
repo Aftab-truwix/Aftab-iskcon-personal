@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../Components/Navbar";
-import Image1 from "../assets/productPage1.svg";
-import Image2 from "../assets/freeDeliveryLogo.svg";
-import Image3 from "../assets/orderNow.svg";
+import Image1 from "../assets/productPage1.webp";
+import Image2 from "../assets/freeDeliveryLogo.webp";
+import Image3 from "../assets/orderNow.webp";
 import Section2 from "../Components/ShopPageComponents/Section2";
 import Section3 from "../Components/ShopPageComponents/Section3";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ function ShopPage() {
                     backgroundPosition: 'center',
                 }}
             >
-              <div className="absolute inset-0 bg-black opacity-40"></div>
+              <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="px-4 md:px-20 pt-4 relative z-50">
           <Navbar />
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "../assets/signUpImage.webp";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.webp";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { FaGoogle } from "react-icons/fa";

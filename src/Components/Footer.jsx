@@ -1,6 +1,6 @@
 import React from "react";
 import footerbg from "../assets/footerbg.webp";
-import logof from "../assets/logofooter.svg";
+import logof from "../assets/logofooter.webp";
 import fb from "../assets/fb.webp"
 import insta from "../assets/insta.webp"
 import twit from "../assets/twit.webp"
