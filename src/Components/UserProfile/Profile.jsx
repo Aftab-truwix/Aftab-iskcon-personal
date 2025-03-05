@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import BgOne from "../../assets/bg2.webp";
 import BgTwo from "../../assets/bg1.webp";
@@ -10,42 +11,30 @@ const backend = import.meta.env.VITE_BACKEND_URL;
 
 function Profile() {
   const [user, setUser] = useState({});
-
-  const fetchUserData = async () => {
-    try {
-      const token = JSON.parse(localStorage.getItem("token"));
-
-      if (!token) {
-        console.error("No token found in localStorage");
-        return;
-      }
-      const response = await fetch(`${backend}/secure/decode`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`, // Send token in Authorization header
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch user data: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setUser(data);
-      setFormData((prev) => ({
-        ...prev,
-        name: data?.userData?.name || "",
-        email: data?.userData?.email || "",
-      }));
-    } catch (error) {
-      console.error("❌ Error fetching user data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  const [profile, setProfile] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    whatsappNumber: "",
+    dob: "",
+    panNumber: "",
+    maritalStatus: "",
+    citizenType: "Indian",
+    gender: "male",
+    address: "",
+    country: "India",
+    state: "",
+    pincode: "",
+    relationships: [{ relation: "", name: "", mobile: "", dob: "" }],
+    occasions: [{ action: "", name: "", date: "" }],
+    idProof: {
+      aadhaarNumber: "",
+      drivingLicense: "",
+      voterId: "",
+      otherId: "",
+    },
+  });
 
   const indiaStates = [
     "Andhra Pradesh",
@@ -84,111 +73,157 @@ function Profile() {
     "Puducherry",
   ];
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState();
-  const [whatsappNumber, setWhatsappNumber] = useState("");
-  const [dob, setDob] = useState("");
-  const [panNumber, setPanNumber] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [citizenType, setCitizenType] = useState("Indian");
-  const [gender, setGender] = useState("male");
+  // Fetch user data from the backend
+  const fetchUserData = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
 
-  // Address
-  const [address, setAddress] = useState("");
-  const [country, setCountry] = useState("India");
-  const [state, setState] = useState("");
-  const [pincode, setPincode] = useState("");
+      if (!token) {
+        console.error("No token found in localStorage");
+        return;
+      }
 
-  // Relationships
-  const [relationships, setRelationships] = useState([
-    { relation: "", name: "", mobile: "", dob: "" },
-  ]);
+      const response = await fetch(`${backend}/secure/decode`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-  // Special Occasions
-  const [occasions, setOccasions] = useState([
-    { action: "", name: "", date: "" },
-  ]);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch user data: ${response.statusText}`);
+      }
 
-  // ID Proof
-  const [aadhaarNumber, setAadhaarNumber] = useState("");
-  const [drivingLicense, setDrivingLicense] = useState("");
-  const [voterId, setVoterId] = useState("");
-  const [otherId, setOtherId] = useState("");
-
-  const [formData, setFormData] = useState({});
-
-  // Handle Relationship Changes
-  const handleRelationshipChange = (index, event) => {
-    const newRelationships = [...relationships];
-    newRelationships[index][event.target.name] = event.target.value;
-    setRelationships(newRelationships);
-  };
-
-  const handleAddRelationship = () => {
-    setRelationships([
-      ...relationships,
-      { relation: "", name: "", mobile: "", dob: "" },
-    ]);
-  };
-
-  const handleDeleteRelationship = (index) => {
-    const newRelationships = [...relationships];
-    newRelationships.splice(index, 1);
-    setRelationships(newRelationships);
-  };
-
-  // Handle Occasion Changes
-  const handleOccasionChange = (index, event) => {
-    const newOccasions = [...occasions];
-    newOccasions[index][event.target.name] = event.target.value;
-    setOccasions(newOccasions);
-  };
-
-  const handleAddOccasion = () => {
-    setOccasions([...occasions, { action: "", name: "", date: "" }]);
-  };
-
-  const handleDeleteOccasion = (index) => {
-    const newOccasions = [...occasions];
-    newOccasions.splice(index, 1);
-    setOccasions(newOccasions);
-  };
-
-  const handlePincodeChange = (value) => {
-    // Allow only numeric input and limit to 6 digits
-    if (/^\d{0,6}$/.test(value)) {
-      setPincode(value);
+      const data = await response.json();
+      setUser(data);
+      setFormData((prev) => ({
+        ...prev,
+        name: data?.userData?.name || "",
+        email: data?.userData?.email || "",
+      }));
+    } catch (error) {
+      console.error("❌ Error fetching user data:", error);
     }
   };
 
-  const handleNameChange = (e) => {
-    setFormData({ ...formData, name: e.target.value });
-  };
-  const handleEmailChange = (e) => {
-    setFormData({ ...formData, email: e.target.value });
-  };
-  // Handle Form Submission
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const fetchUserProfile = async (email) => {
 
-    const formData = {
-      personalDetails: {
-        name: formData.name,
-        email: formData.email,
-        mobile,
-        whatsappNumber,
-        dob,
-        panNumber,
-        maritalStatus,
-        citizenType,
-        gender,
-      },
-      address: { address, country, state, pincode },
-      relationships,
-      occasions,
-      idProof: { aadhaarNumber, drivingLicense, voterId, otherId },
-    };
+    try {
+      // Make a GET request to the backend API
+      const response = await fetch(`${backend}/admin/profile?email=${email}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      // Parse the JSON response
+      const data = await response.json();
+      setProfile(data.profile);
+  
+      // Return the profile data
+      return data.profile;
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+      throw error; // Re-throw the error for handling in the calling function
+    }
+  };
+
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (user?.userData?.email) {
+      fetchUserProfile(user.userData.email)
+        .then((profile) => {
+          console.log("Fetched profile:", profile);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch profile:", error);
+        });
+    } else {
+      console.log("Email is undefined or user data is not available yet.");
+    }
+  }, [user?.userData?.email]); // Add dependency to re-run when email changes
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle relationship changes
+  const handleRelationshipChange = (index, e) => {
+    const { name, value } = e.target;
+    const newRelationships = [...formData.relationships];
+    newRelationships[index][name] = value;
+    setFormData((prev) => ({
+      ...prev,
+      relationships: newRelationships,
+    }));
+  };
+
+  const handleAddRelationship = () => {
+    setFormData((prev) => ({
+      ...prev,
+      relationships: [
+        ...prev.relationships,
+        { relation: "", name: "", mobile: "", dob: "" },
+      ],
+    }));
+  };
+
+  const handleDeleteRelationship = (index) => {
+    const newRelationships = formData.relationships.filter((_, i) => i !== index);
+    setFormData((prev) => ({
+      ...prev,
+      relationships: newRelationships,
+    }));
+  };
+
+  // Handle occasion changes
+  const handleOccasionChange = (index, e) => {
+    const { name, value } = e.target;
+    const newOccasions = [...formData.occasions];
+    newOccasions[index][name] = value;
+    setFormData((prev) => ({
+      ...prev,
+      occasions: newOccasions,
+    }));
+  };
+
+  const handleAddOccasion = () => {
+    setFormData((prev) => ({
+      ...prev,
+      occasions: [
+        ...prev.occasions,
+        { action: "", name: "", date: "" },
+      ],
+    }));
+  };
+
+  const handleDeleteOccasion = (index) => {
+    const newOccasions = formData.occasions.filter((_, i) => i !== index);
+    setFormData((prev) => ({
+      ...prev,
+      occasions: newOccasions,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
       const response = await fetch(`${backend}/admin/profile/create`, {
@@ -231,7 +266,6 @@ function Profile() {
           style={{
             backgroundImage: `url(${BgTwo})`,
             backgroundPosition: "right",
-            // backgroundRepeat: 'no-repeat',
             backgroundSize: "contain",
           }}
         >
@@ -261,6 +295,7 @@ function Profile() {
             </div>
           </div>
         </div>
+
         <form onSubmit={handleSubmit}>
           {/* Personal Details Section */}
           <div className="w-full h-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 md:grid-cols-4 md:mt-10">
@@ -271,8 +306,9 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md"
+              name="name"
               value={formData.name}
-              onChange={handleNameChange}
+              onChange={handleInputChange}
               InputLabelProps={{ shrink: true }}
             />
             <TextField
@@ -282,8 +318,9 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md"
+              name="email"
               value={formData.email}
-              onChange={handleEmailChange}
+              onChange={handleInputChange}
               InputLabelProps={{ shrink: true }}
             />
             <TextField
@@ -293,8 +330,9 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
+              name="mobile"
+              value={formData.mobile || profile.mobile || ""}
+              onChange={handleInputChange}
             />
             <TextField
               label="Whatsapp Number"
@@ -303,8 +341,9 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md"
-              value={whatsappNumber}
-              onChange={(e) => setWhatsappNumber(e.target.value)}
+              name="whatsappNumber"
+              value={formData.whatsappNumber || profile.whatsappNumber || ""}
+              onChange={handleInputChange}
             />
             <TextField
               label="Date of Birth"
@@ -313,9 +352,10 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md h-14"
+              name="dob"
+              value={formData.dob || profile.dob || ""}
+              onChange={handleInputChange}
               InputLabelProps={{ shrink: true }}
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
             />
             <TextField
               label="Pan Number"
@@ -324,19 +364,21 @@ function Profile() {
               fullWidth
               margin="normal"
               className="bg-white rounded-md h-14"
-              value={panNumber}
-              onChange={(e) => setPanNumber(e.target.value)}
+              name="panNumber"
+              value={formData.panNumber || profile.panNumber || ""}
+              onChange={handleInputChange}
             />
             <FormControl fullWidth>
               <Select
-                value={maritalStatus}
-                onChange={(e) => setMaritalStatus(e.target.value)}
+                value={formData.maritalStatus || profile.maritalStatus || ""}
+                onChange={handleInputChange}
                 className="bg-white rounded-md my-4"
                 displayEmpty
-                renderValue={(selected) => selected || <em>Martial Status</em>}
+                name="maritalStatus"
+                renderValue={(selected) => selected || <em>Marital Status</em>}
               >
                 <MenuItem value="">
-                  <em>Select a Martial Status</em>
+                  <em>Select a Marital Status</em>
                 </MenuItem>
                 <MenuItem value="Single">Single</MenuItem>
                 <MenuItem value="Married">Married</MenuItem>
@@ -357,8 +399,8 @@ function Profile() {
                 row
                 aria-label="citizenType"
                 name="citizenType"
-                value={citizenType}
-                onChange={(e) => setCitizenType(e.target.value)}
+                value={formData.citizenType || profile.citizenType || ""}
+                onChange={handleInputChange}
               >
                 <FormControlLabel
                   value="Indian"
@@ -378,8 +420,8 @@ function Profile() {
                 row
                 aria-label="gender"
                 name="gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
+                value={formData.gender || profile.gender || ""}
+                onChange={handleInputChange}
               >
                 <FormControlLabel
                   value="female"
@@ -411,8 +453,9 @@ function Profile() {
                 fullWidth
                 margin="normal"
                 className="bg-white rounded-md"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                name="address"
+                value={formData.address || profile.address || ""}
+                onChange={handleInputChange}
               />
               <FormControl fullWidth>
                 <Select
@@ -427,10 +470,11 @@ function Profile() {
               </FormControl>
               <FormControl fullWidth>
                 <Select
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
+                  value={formData.state || profile.state || ""}
+                  onChange={handleInputChange}
                   className="bg-white rounded-md mt-4"
                   displayEmpty
+                  name="state"
                   renderValue={(selected) => selected || <em>State</em>}
                 >
                   <MenuItem value="">
@@ -445,21 +489,28 @@ function Profile() {
               </FormControl>
               <TextField
                 label="Pincode"
-                type="text" 
+                type="text"
                 variant="outlined"
                 fullWidth
                 margin="normal"
                 className="bg-white rounded-md"
-                value={pincode}
-                onChange={(e) => handlePincodeChange(e.target.value)}
+                name="pincode"
+                value={formData.pincode || profile.pincode || ""}
+                onChange={(e) => {
+                  if (/^\d{0,6}$/.test(e.target.value)) {
+                    handleInputChange(e);
+                  }
+                }}
                 inputProps={{
-                  maxLength: 6, 
-                  inputMode: "numeric", 
+                  maxLength: 6,
+                  inputMode: "numeric",
                 }}
                 helperText={
-                  pincode.length === 6 ? "" : "Pincode must be exactly 6 digits"
-                } 
-                error={pincode.length !== 6} 
+                  formData.pincode.length === 6
+                    ? ""
+                    : "Pincode must be exactly 6 digits"
+                }
+                error={formData.pincode.length !== 6}
               />
             </div>
           </div>
@@ -478,7 +529,7 @@ function Profile() {
                 Add More
               </button>
             </div>
-            {relationships.map((relationship, index) => (
+            {formData.relationships.map((relationship, index) => (
               <div
                 key={index}
                 className="w-full h-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 md:grid-cols-4"
@@ -486,8 +537,8 @@ function Profile() {
                 <FormControl fullWidth>
                   <Select
                     name="relation"
-                    value={relationship.relation}
-                    onChange={(event) => handleRelationshipChange(index, event)}
+                    value={relationship.relation }
+                    onChange={(e) => handleRelationshipChange(index, e)}
                     className="bg-white rounded-md mt-4"
                     displayEmpty
                     renderValue={(selected) => selected || <em>Relation</em>}
@@ -520,7 +571,7 @@ function Profile() {
                   margin="normal"
                   value={relationship.name}
                   name="name"
-                  onChange={(event) => handleRelationshipChange(index, event)}
+                  onChange={(e) => handleRelationshipChange(index, e)}
                   className="bg-white rounded-md"
                 />
                 <TextField
@@ -531,7 +582,7 @@ function Profile() {
                   margin="normal"
                   value={relationship.mobile}
                   name="mobile"
-                  onChange={(event) => handleRelationshipChange(index, event)}
+                  onChange={(e) => handleRelationshipChange(index, e)}
                   className="bg-white rounded-md"
                 />
                 <TextField
@@ -542,7 +593,7 @@ function Profile() {
                   margin="normal"
                   value={relationship.dob}
                   name="dob"
-                  onChange={(event) => handleRelationshipChange(index, event)}
+                  onChange={(e) => handleRelationshipChange(index, e)}
                   className="bg-white rounded-md h-14"
                   InputLabelProps={{ shrink: true }}
                 />
@@ -573,7 +624,7 @@ function Profile() {
                 Add More
               </button>
             </div>
-            {occasions.map((occasion, index) => (
+            {formData.occasions.map((occasion, index) => (
               <div
                 key={index}
                 className="w-full h-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 md:grid-cols-4"
@@ -582,7 +633,7 @@ function Profile() {
                   <Select
                     name="action"
                     value={occasion.action}
-                    onChange={(event) => handleOccasionChange(index, event)}
+                    onChange={(e) => handleOccasionChange(index, e)}
                     className="bg-white rounded-md mt-4"
                     displayEmpty
                     renderValue={(selected) =>
@@ -604,7 +655,7 @@ function Profile() {
                   margin="normal"
                   value={occasion.name}
                   name="name"
-                  onChange={(event) => handleOccasionChange(index, event)}
+                  onChange={(e) => handleOccasionChange(index, e)}
                   className="bg-white rounded-md md:col-span-2"
                 />
                 <TextField
@@ -615,7 +666,7 @@ function Profile() {
                   margin="normal"
                   value={occasion.date}
                   name="date"
-                  onChange={(event) => handleOccasionChange(index, event)}
+                  onChange={(e) => handleOccasionChange(index, e)}
                   className="bg-white rounded-md h-14"
                   InputLabelProps={{ shrink: true }}
                 />
@@ -642,8 +693,17 @@ function Profile() {
                 variant="outlined"
                 margin="normal"
                 className="bg-white rounded-md"
-                value={aadhaarNumber}
-                onChange={(e) => setAadhaarNumber(e.target.value)}
+                name="aadhaarNumber"
+                value={formData.idProof.aadhaarNumber}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    idProof: {
+                      ...prev.idProof,
+                      aadhaarNumber: e.target.value,
+                    },
+                  }))
+                }
               />
               <TextField
                 label="Driving License"
@@ -651,8 +711,17 @@ function Profile() {
                 variant="outlined"
                 margin="normal"
                 className="bg-white rounded-md"
-                value={drivingLicense}
-                onChange={(e) => setDrivingLicense(e.target.value)}
+                name="drivingLicense"
+                value={formData.idProof.drivingLicense}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    idProof: {
+                      ...prev.idProof,
+                      drivingLicense: e.target.value,
+                    },
+                  }))
+                }
               />
               <TextField
                 label="Voter ID"
@@ -660,8 +729,17 @@ function Profile() {
                 variant="outlined"
                 margin="normal"
                 className="bg-white rounded-md"
-                value={voterId}
-                onChange={(e) => setVoterId(e.target.value)}
+                name="voterId"
+                value={formData.idProof.voterId}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    idProof: {
+                      ...prev.idProof,
+                      voterId: e.target.value,
+                    },
+                  }))
+                }
               />
               <TextField
                 label="Other"
@@ -669,8 +747,17 @@ function Profile() {
                 variant="outlined"
                 margin="normal"
                 className="bg-white rounded-md 2xl:col-span-2"
-                value={otherId}
-                onChange={(e) => setOtherId(e.target.value)}
+                name="otherId"
+                value={formData.idProof.otherId}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    idProof: {
+                      ...prev.idProof,
+                      otherId: e.target.value,
+                    },
+                  }))
+                }
               />
             </div>
           </div>
