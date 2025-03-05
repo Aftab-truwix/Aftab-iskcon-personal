@@ -66,7 +66,6 @@ function DailyDarshan() {
     // Data fetching
     async function getAllMedia() {
         try {
-            console.log(selectedDate)
             const response = await axios.post(`${backend}/admin/media/get-media-date`, {
                 date: selectedDate
             });

@@ -22,6 +22,7 @@ import { useLocation } from "react-router-dom";
 import StoryViewer from "../Components/Strory.jsx";
 import DonationCartPopup from "./DonationCartPopup.jsx";
 
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartSidebar, setCartSidebar] = useState(false);
@@ -196,12 +197,19 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (donationCartItems.length > 0) {
+    // Define the routes where the sidebar should open
+    const sidebarRoutes = ["/temple-construction", "/donation", "/csr"];
+
+    // Check if the current route is in the allowed routes
+    const isSidebarRoute = sidebarRoutes.includes(location.pathname);
+
+    // Open the sidebar if there are items in the cart AND the route is allowed
+    if (donationCartItems.length > 0 && isSidebarRoute) {
       setDonationSidebar(true);
     } else {
       setDonationSidebar(false);
     }
-  }, [donationCartItems]);
+  }, [donationCartItems, location.pathname]);
 
   return (
     <>
@@ -565,7 +573,7 @@ const Navbar = () => {
                 </span>
               )}
             </button>
-            <button
+            {/* <button
               onClick={() => setDonationSidebar(true)}
               className="text-black hover:text-[#eb852c] relative"
             >
@@ -576,7 +584,7 @@ const Navbar = () => {
                   {donationCartItems.length}
                 </span>
               )}
-            </button>
+            </button> */}
             <div className="flex gap-4">
               <NavLink
                 to="/donate"

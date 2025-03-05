@@ -17,7 +17,6 @@ const Classes = () => {
     try {
       const response = await axios.get(`${backend}/admin/offlineClasses/`);
       setClasses(response.data.data);
-      console.log("Classes fetched:", response.data.data);
     } catch (error) {
       console.error("Error while fetching classes:", error);
     }

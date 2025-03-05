@@ -10,7 +10,7 @@ import {
   Route,
   createRoutesFromElements,
 } from "react-router-dom";
-const Homepage = React.lazy(() => import("./Pages/Homepage.jsx"));
+import Homepage from "./Pages/Homepage.jsx";
 const AdminLogin = React.lazy(() => import("./Components/AdminLogin.jsx"));
 const AdminDashboard = React.lazy(() =>
   import("./Components/Admin-Dashboard/AdminDashboard.jsx")
