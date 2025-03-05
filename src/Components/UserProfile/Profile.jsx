@@ -162,6 +162,12 @@ function Profile() {
     }
   };
 
+  const handleNameChange = (e) => {
+    setFormData({ ...formData, name: e.target.value });
+  };
+  const handleEmailChange = (e) => {
+    setFormData({ ...formData, email: e.target.value });
+  };
   // Handle Form Submission
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -266,7 +272,8 @@ function Profile() {
               margin="normal"
               className="bg-white rounded-md"
               value={formData.name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleNameChange}
+              InputLabelProps={{ shrink: true }}
             />
             <TextField
               label="Email"
@@ -276,7 +283,8 @@ function Profile() {
               margin="normal"
               className="bg-white rounded-md"
               value={formData.email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
+              InputLabelProps={{ shrink: true }}
             />
             <TextField
               label="Mobile"
