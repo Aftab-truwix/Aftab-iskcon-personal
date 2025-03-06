@@ -17,7 +17,7 @@ const DonationCartPopup = ({ donationCartItems, onClose, addToCart, removeFromCa
   
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center -top-[700px] bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center -top-[800px] bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6  max-w-7xl w-full">
         <div className="flex justify-between items-center border-b pb-2">
           <h2 className="text-lg font-semibold">Donating for</h2>

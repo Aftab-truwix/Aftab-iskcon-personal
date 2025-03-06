@@ -17,9 +17,9 @@ import { Link, NavLink } from "react-router-dom";
 const Homepage = () => {
   const [animationProgress, setAnimationProgress] = useState(0);
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     let progress = 0;
@@ -66,16 +66,18 @@ const Homepage = () => {
     transform: `translateY(${Math.min(
       -animationProgress * 4,
       500
-    )}px) translateX(${Math.min(animationProgress * 3.4, 800)}px) scale(${1 + animationProgress * 0.04
-      })`, // Move up and right diagonally and scale
+    )}px) translateX(${Math.min(animationProgress * 3.4, 800)}px) scale(${
+      1 + animationProgress * 0.04
+    })`, // Move up and right diagonally and scale
   };
 
   const sunStyle2 = {
     transform: `translateY(${Math.min(
       -animationProgress * 3.2,
       500
-    )}px) translateX(${Math.min(animationProgress * 0.6, 400)}px) scale(${1 + animationProgress * 0.02
-      })`, // Move up and right diagonally and scale
+    )}px) translateX(${Math.min(animationProgress * 0.6, 400)}px) scale(${
+      1 + animationProgress * 0.02
+    })`, // Move up and right diagonally and scale
   };
 
   const textStyle = {
@@ -102,10 +104,12 @@ const Homepage = () => {
             >
               <div className="flex flex-col gap-2 relative z-[999]">
                 <h3 className="text-lg lg:text-xl">
-                Feel the Divine Essence of Lord Krishna
+                  Feel the Divine Essence of Lord Krishna
                 </h3>
                 <h2 className="text-2xl lg:text-4xl">Welcome to</h2>
-                <h1 className="text-3xl lg:text-5xl font-extrabold">ISKCON Wavecity <br/> Ghaziabad</h1>
+                <h1 className="text-3xl lg:text-5xl font-extrabold">
+                  ISKCON Wavecity <br /> Ghaziabad
+                </h1>
                 <div className="flex gap-4 items-center">
                   <a href="/donation#donationcircle" className="">
                     <button className="w-[180px] rounded-full bg-white text-[#eb852c] hover:border-2 hover:border-[#eb852c] py-3 px-4 cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
@@ -127,24 +131,31 @@ const Homepage = () => {
               <img src={grass} alt="grass" className="w-full" />
             </div>
             <div className="w-full min-h-screen relative -right-48 z-10">
-              <img
-                src={tree}
-                alt="tree"
-                className="w-full lg:max-h-[900px] md:h-[900px] absolute -top-[8px]"
-                style={treeStyle}
-              />
-              <img
-                src={krishna}
-                alt="krishna"
-                className="absolute top-1/3 left-[45%] z-20 "
-                style={krishnaStyle}
-              />
-              <img
-                src={morpankh}
-                alt="morpankh"
-                className="absolute md:top-[29%] lg:top-[28%] md:right-[4%] lg:right-[29%]"
-                style={morpankhStyle}
-              />
+              {/* Tree Image Container */}
+              <div className="w-full lg:max-h-[900px] md:h-[900px] absolute -top-[8px]">
+                <img
+                  src={tree}
+                  alt="tree"
+                  className="w-full h-full"
+                  style={treeStyle}
+                />
+
+                {/* Krishna Image Container (attached to the tree) */}
+                <div
+                  className="absolute bottom-10 left-[45%] z-20"
+                  style={krishnaStyle}
+                >
+                  <img src={krishna} alt="krishna" className="w-[700px] h-[600px] " />
+
+                  {/* Morpankh Image (attached to Krishna's head) */}
+                  <img
+                    src={morpankh}
+                    alt="morpankh"
+                    className="absolute top-3 left-[45%] transform -translate-x-1/2 -translate-y-1/2"
+                    style={{ width: "80px", height: "80px" }} // Adjust size as needed
+                  />
+                </div>
+              </div>
             </div>
             <div
               className="w-full h-full absolute -bottom-10 z-0 "
@@ -179,11 +190,11 @@ const Homepage = () => {
             >
               <div className="flex flex-col gap-2 mt-10 pl-4">
                 <h3 className="text-sm">
-                Feel the Divine Essence of Lord Krishna
+                  Feel the Divine Essence of Lord Krishna
                 </h3>
                 <h2 className="text-xl">Welcome to</h2>
                 <h1 className="text-3xl font-extrabold">
-                  ISKCON Wavecity <br/> Ghaziabad
+                  ISKCON Wavecity <br /> Ghaziabad
                 </h1>
                 <Link to="/donation#donationcircle" className="">
                   <div className="flex justify-start">
@@ -217,13 +228,13 @@ const Homepage = () => {
               <img
                 src={krishna}
                 alt="krishna"
-                className="absolute top-[45%]  left-[40%] "
+                className="absolute top-[40%]  left-[40%] "
                 style={krishnaStyle}
               />
               <img
                 src={morpankh}
                 alt="morpankh"
-                className="w-[50px] absolute top-[43%] right-[11%]"
+                className="w-[50px] absolute top-[38%] right-[11%]"
                 style={morpankhStyle}
               />
             </div>

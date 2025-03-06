@@ -198,11 +198,18 @@ const Navbar = () => {
 
   useEffect(() => {
     // Define the routes where the sidebar should open
-    const sidebarRoutes = ["/temple-construction", "/donation", "/csr"];
-
-    // Check if the current route is in the allowed routes
-    const isSidebarRoute = sidebarRoutes.includes(location.pathname);
-
+    const sidebarRoutes = [
+      "/temple-construction",
+      "/donation",
+      "/csr",
+      "/donation/single-donation", // Base route for dynamic paths
+    ];
+  
+    // Check if the current route matches any of the allowed routes
+    const isSidebarRoute =
+      sidebarRoutes.includes(location.pathname) ||
+      location.pathname.startsWith("/donation/single-donation/");
+  
     // Open the sidebar if there are items in the cart AND the route is allowed
     if (donationCartItems.length > 0 && isSidebarRoute) {
       setDonationSidebar(true);

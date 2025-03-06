@@ -126,6 +126,7 @@ function Profile() {
       // Parse the JSON response
       const data = await response.json();
       setProfile(data.profile);
+      console.log(data.profile);
   
       // Return the profile data
       return data.profile;

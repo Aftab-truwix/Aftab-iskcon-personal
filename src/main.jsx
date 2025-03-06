@@ -136,7 +136,6 @@ const Classes = React.lazy(() => import("./Components/Classes.jsx"));
 const TempleConstructionPage = React.lazy(() =>
   import("./Components/TempleConstructionDonation.jsx")
 );
-import { ToastContainer } from "react-toastify";
 import ErrorBoundary from "./Components/ErrorBoundary.jsx";
 
 const MainApp = () => {
@@ -300,7 +299,6 @@ const MainApp = () => {
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ErrorBoundary>
-      <ToastContainer />
       <Suspense fallback={<div>Loading...</div>}>
         <MainApp />
       </Suspense>
